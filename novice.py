@@ -19,4 +19,11 @@ pd.Series([30, 35, 40], index = ['2015 sales', '2016 sales', '2017 sales'],
 name = 'ProductA')
 
 #Reading data
-wine_reviews = pd.read_csv()
+ebola_data = pd.read_csv("ebola_data_db_format.csv")
+
+#Get the dimensions of the data
+ebola_data.shape
+
+#Get the first and last 5 entries of the dataset
+ebola_data.head()
+ebola_data.tail()
