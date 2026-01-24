@@ -41,3 +41,15 @@ print(birds)
 #Sorting a list in alphabetical order
 birds.sort()
 print(birds)
+
+#Writing loops
+for ape in apes:
+    print(ape + "is an ape")
+
+for ape in apes:
+    name_length = len(ape)
+    first_letter = ape[0]
+    print(ape + " has " + str(name_length) + " letters")
+    print(ape + " is an ape and its name starts with " + first_letter)
+
+    
