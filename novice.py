@@ -52,4 +52,7 @@ for ape in apes:
     print(ape + " has " + str(name_length) + " letters")
     print(ape + " is an ape and its name starts with " + first_letter)
 
-    
+#Using a string as a list
+name = "clement"
+for character in name:
+    print("one character is " + character)   
