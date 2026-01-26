@@ -55,4 +55,11 @@ for ape in apes:
 #Using a string as a list
 name = "clement"
 for character in name:
-    print("one character is " + character)   
+    print("one character is " + character)
+
+#Splitting a string by a delimiter
+species_names = "melanogaster,yakubu,simulans,ananassae"
+species_split = species_names.split(",")
+print(species_split)
+species_split2 = species_names.split(" ")
+print(species_split2)
