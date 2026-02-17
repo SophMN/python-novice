@@ -191,6 +191,35 @@ def rna_transcript(dna):
 my_transcript = rna_transcript(dna)
 print(my_transcript)
 
+###Course assignment
+#Question 4
+def analyze_dna(sequence):
+    dna_seq = sequence.upper()
+    count = 0
+    for base in dna_seq:
+        if base == "G" or base == "C":
+            count += 1
+    gc_content = (count / len(dna_seq)) * 100
+    if gc_content >= 50:
+        print("Stable")
+    else:
+        print("Unstable")
+    return(gc_content)
+seq = "ggccaattgcgcactgcacg"
+print(analyze_dna(my_dna))
+print(analyze_dna(seq))
+
+##Question 6
+import random
+bases = ["A", "G", "C", "T"]
+my_sequence = ""
+for i in range(10):
+    my_sequence += random.choice(bases)
+print(my_sequence)
+
+
+
+
 
 
 
