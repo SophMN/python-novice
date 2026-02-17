@@ -113,3 +113,84 @@ for accession in accs:
 ##Using assertion to check whether your function is working appropriately
 assert get_at_content(dna) == 0.42
 assert get_at_content(dna) == 0.2
+
+###Elif statements
+file1 = open("one.txt", "w")
+file2 = open("two.txt", "w")
+file3 = open("three.txt", "w")
+accs = ['ab56', 'bh84', 'hv76', 'ay93', 'ap97', 'bd72']
+for accession in accs:
+    if accession.startswith('a'):
+        file1.write(accession + "\n")
+    elif accession.startswith('b'):
+        file2.write(accession + "\n")
+    else:
+        file3.write(accession + "\n")
+file1.close
+file2.close
+file3.close
+
+my_dna = "ATGCGATACG"
+count = 0
+for base in my_dna:
+    if base == "G" or base == "C":
+        count += 1
+print(count / len(my_dna))
+
+##While loops
+count = 0
+while count < 10:
+    print(count)
+    count = count + 1
+
+##Building up conditions using boolean operators
+for accession in accs:
+    if accession.startswith('a') and accession.endswith('3'):
+        print(accession)
+
+for accession in accs:
+    if accession.startswith('a') or accession.endswith('3'):
+        print(accession)
+
+for accession in accs:
+    if accession.startswith('a') and not accession.endswith('6'):
+        print(accession)
+
+def at_rich(dna):
+    length = len(dna)
+    a_count = dna.upper().count('A')
+    t_count = dna.upper().count('T')
+    at_content = (a_count + t_count) / length
+    return at_content > 0.65
+dna = "ATGCCGATCATGAACCTTGACTGGTAT"
+my_at_content = at_rich(dna)
+print(my_at_content)
+
+##Create a function that generates the complementary sequence
+def get_complement(dna):
+    reference = dna.maketrans('agctAGCT', 'tcgaTCGA')
+    complement_seq = dna.translate(reference)
+    return complement_seq
+my_complement = get_complement(dna)
+print(my_complement)
+
+##Create a function that generates the reverse complement
+def rev_complement(dna):
+    reference = dna.maketrans('agctAGCT', 'tcgaTCGA')
+    complement_seq = dna.translate(reference)
+    reverse_complement = complement_seq[::-1]
+    return reverse_complement
+my_rev_complement = rev_complement(dna)
+print(my_rev_complement)
+
+##Create a function that generates the RNA transcript from a DNA template strand
+def rna_transcript(dna):
+    rna_ref = dna.maketrans('agctAGCT', 'ucgaUCGA')
+    rna_seq = dna.translate(rna_ref)
+    return rna_seq
+my_transcript = rna_transcript(dna)
+print(my_transcript)
+
+
+
+
