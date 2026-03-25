@@ -217,6 +217,101 @@ for i in range(10):
     my_sequence += random.choice(bases)
 print(my_sequence)
 
+##Consider the list below. Write code that will print out the name and length of each element
+apes = ["Homo sapiens", "Pan troglodytes", "Gorilla gorilla"]
+for ape in apes:
+    print(ape)
+    print(len(ape))
+
+letters = ["p", "e", "d", "k", "m"]
+letters + ["y"]
+letters[len(letters) - 2]
+letters.append('y')
+print(letters)
+
+def get_at_content(sequence):
+    sequence = sequence.upper()
+    a_count = count('A')
+    t_count = count('T')
+    return round((a_count + t_count) / len(sequence) , 2)
+dna = "TATATATAGGGGCCCAAATCTCAGCTA"
+print(get_at_content(dna))
+
+import re
+if re.search(r"GAATTC", dna):
+    print("Restriction site found!")
+else:
+    print("No restriction site")
+
+sequence = "ATGACGTACGTACGACTG"
+m = re.search(r"GA[ATGC]{3}AC", sequence)
+print(m.group())
+
+#Find all matches
+dna = "ACTGCATTATATCGTACGAAATTATACGCGCG"
+runs = re.findall(r"[AT]{3,100}", dna)
+print(runs)
+
+#Return a sequence of match objects with find.iter
+runs = re.finditer(r"[AT]{3,100}", dna)
+for match in runs:
+    run_start = match.start()
+    run_end = match.end()
+    print("AT-rich region from " + str(run_start) + " to " + str(run_end))
+
+##Dictionaries
+enzymes = {'EcoRI': 'GAATTC', 
+           'AvaII': 'GGATCC', 
+           'BisI': 'GCATGCGC'}
+enzymes['BisI']
+print(enzymes.keys())
+print(enzymes.values())
+
+#Iterate over a dictionary with the items method
+for key, value in enzymes.items():
+    print(key, value)
+
+#While loops
+rna = "AUGCGUACGUAGGCUA"
+stop_codons = ["UAA", "UAG", "UGA"]
+i = 0
+while i < len(rna):
+    codon = rna[i:i+3]
+    print("Reading codon:", codon)
+    if codon in stop_codons:
+        print("Stop codon found!")
+        break
+    i+=3
+
+#Writing and closing a file
+my_file = open("dna.txt", "w")
+my_file.write("Hello world")
+my_file.close()
+
+##Write a program that will print the complement of a given DNA sequence
+dna_seq = "ACTGATCGATTACGTATAGTATTTGCTATCATACATATATATCGATGCGTTCAT"
+def get_dna_complement(sequence):
+    reference = sequence.maketrans('agctAGCT', 'tcgaTCGA')
+    return sequence.translate(reference)
+print(get_dna_complement(dna_seq))
+dna_seq.find('G')
+dna_seq.index('G')
+
+###Biopython
+#Transcribing and translating DNA
+import Bio
+from Bio.Seq import Seq
+dna = Seq("ATGGCC")
+rna = dna.transcribe()
+print(rna)
+protein = dna.translate()
+print(protein)
+
+#Calculating the gc_content with Biopython
+from Bio.SeqUtils import gc_fraction
+gc_content = gc_fraction(dna_seq) * 100
+print(gc_content)
+
 
 
 
