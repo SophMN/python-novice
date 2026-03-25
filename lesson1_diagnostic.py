@@ -121,6 +121,63 @@ for codon in codons:
 
 print(f'Start codons: {start_codon_count} | Stop codons: {stop_codon_count}')
 
+##Mini-challenge: DNA sequence analyzer
+sequence_list = ["ATGCGTACGTAA", "ATGAAAAAA", "GGGCGCGCGC", "ATGTTTTGA", "CCCATGCCC"]
+
+#Part 1: print each sequence, its length and GC classification using classify_gc()
+for seq in sequence_list:
+    print(f'Sequence: {seq} | Length: {str(len(seq))} | GC classification: {classify_gc(seq)}')
+
+#Part 2: Find the first coding sequence
+i = 0
+first_sequence = ''
+
+while i < len(sequence_list):
+    seq = sequence_list[i]
+
+    if seq.startswith('ATG'):
+        print("First sequence found: ", seq)
+        first_sequence = seq
+        break
+    i += 1
+
+i = 0
+coding_region = ''
+while i + 3 <= len(first_sequence):
+    codon = first_sequence[i:i+3]
+
+    if codon in stop_codons:
+        coding_region = first_sequence[:i+3]
+        break
+    i += 3
+
+print("Coding region found: ", coding_region)
+
+##Part 3: skip low GC sequences
+for seq in sequence_list:
+    if classify_gc(seq) in ["Medium GC", "High GC"]:
+        print(seq)
+
+##Part 4: Count the total number of start and stop codons in each sequence but stop once the first stop codon is found
+start_codon_count = 0
+stop_codon_count = 0
+for seq in sequence_list:
+    i = 0
+    while i + 3 <= len(seq):
+        codon = seq[i:i+3]
+        
+        if codon == "ATG":
+            start_codon_count += 1
+        
+        if codon in stop_codons:
+            stop_codon_count += 1
+            break
+        i += 3
+print(f"Total start codons: {start_codon_count}")
+print(f"Total first stop codons: {stop_codon_count}")
+
+
+
 
 
 
