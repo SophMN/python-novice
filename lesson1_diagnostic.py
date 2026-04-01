@@ -208,12 +208,35 @@ def compute_loe(p, g, nsims, init_temp):
         return("Repeat experiment")
     else:
         return("Reject")
-    
-result01 = compute_loe(p = 30, g = 5.5, nsims = 8, init_temp = 20)
+
+result01 = compute_loe(p=30, g=5.5, nsims=8, init_temp=20)
 print(result01)
 
 result02 = compute_loe(p = 9.8, g = 10, nsims = 20, init_temp= 15)
 print(result02)
+
+result03 = compute_loe(init_temp = 35, nsims = 100, p = 68, g = 21)
+print(result03)
+
+result04 = compute_loe(init_temp=28, nsims=35, p=28, g=0.5)
+print(result04)
+
+##Improve our function by allowing user input and halting when nsims < 10
+while True:
+    p = float(input("Please enter the final temperature (p): "))
+    g = float(input("Please enter the gamma value (g) of the protein: "))
+    nsims = int(input("Please enter the number of simulations: "))
+    init_temp = float(input("Please enter the initial temperature: "))
+    
+    #Validate the number of simulations
+    if nsims < 10:
+        print("Error! The number of simulations must be a minimum of 10. Please try again")
+        continue
+    
+    #Compute the loe
+    result = compute_loe(p, g, nsims, init_temp)
+    print("Result: ", result)
+    break
 
 ##Reverse complementary strand
 def rev_complement(sequence, isDNA = True):
@@ -263,9 +286,3 @@ while True:
         print("Primer sequence is ideal for analysis")
         break
    
-
-
-
-
-
-
