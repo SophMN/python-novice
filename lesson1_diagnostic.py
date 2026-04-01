@@ -176,18 +176,93 @@ for seq in sequence_list:
 print(f"Total start codons: {start_codon_count}")
 print(f"Total first stop codons: {stop_codon_count}")
 
+##Python function for determining the likelihood of error of simulation
+def compute_loe(p, g, nsims, init_temp):
+    """Returns the likelihood of error when a simulation is run on proteins
+    Parameters
+    ----------
+    p = final temperature after simulation
+    g (gamma) = value that depends on the protein being evaluated
 
+    Abbreviations
+    -------------
+    loe = likelihood of error
+    nsims = number of simultations
+    init_temp = initial temperature
+    lab_ind = lab index
 
+    Returns
+    -------
+    Valid result if loe < 30
+    Repeat experiment if 30 <= loe <= 60
+    Reject result if loe > 60
+    """
+    lab_ind = 3 * (p**2) + g + 12.5
+    loe = (nsims * init_temp * lab_ind) / 1000
 
+    if nsims < 10:
+        return("Violates minimum number of simulations")
+    if loe < 30:
+        return("Valid results")
+    elif 30 <=  loe <= 60:
+        return("Repeat experiment")
+    else:
+        return("Reject")
+    
+result01 = compute_loe(p = 30, g = 5.5, nsims = 8, init_temp = 20)
+print(result01)
 
+result02 = compute_loe(p = 9.8, g = 10, nsims = 20, init_temp= 15)
+print(result02)
 
+##Reverse complementary strand
+def rev_complement(sequence, isDNA = True):
+    """Returns the reverse complementary strand of an input sequence strand"""
+    if isDNA:
+        sequence = sequence.replace('U', 'T')
 
+        dna_complement = sequence.maketrans('atgcATGC', 'tacgTACG')
+        return sequence.translate(dna_complement)
+    
+    else:
+        sequence = sequence.replace('T', 'U')
 
+        rna_complement = sequence.maketrans('augcAUGC', 'uacgUACG')
+        return sequence.translate(rna_complement)
+    
+seq1 = 'ATGCTTTACGTACGACATCGAATCCTACA'
+print(rev_complement(seq1, isDNA = True))
 
+seq2 = 'CGAUGCACGUACGUGACAUCGAACCGGUAUAUA'
+print(rev_complement(seq2, isDNA = False))
 
+##Calculate total salary of a salesperson
+def total_salary(toothpaste_sales, toothpowder_sales, retainer = 25000):
+    """Returns the total salary of the salesman"""
+    commission = (0.1 * toothpaste_sales) + (0.2 * toothpowder_sales)
+    return commission + retainer
 
+print(total_salary(toothpaste_sales=20000, toothpowder_sales=50000))
+print(total_salary(toothpaste_sales=0, toothpowder_sales=0))
 
-             
+##Primer sequence analyzer
+while True:
+    sequence = input("Please provide your primer sequence: ")
+
+    #Check for an empty string
+    if sequence == "":
+        print("Error! Primer sequence cannot be empty. Please try again")
+        continue
+
+    #Check the primer length
+    if len(sequence) < 10:
+        print("Primer sequence is too short. Must be at least 10 nucleotides.")
+    elif len(sequence) > 25:
+        print("Primer sequence is too long. Must not exceed 25 nucleotides.")
+    else:
+        print("Primer sequence is ideal for analysis")
+        break
+   
 
 
 
