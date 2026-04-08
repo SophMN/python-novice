@@ -285,4 +285,195 @@ while True:
     else:
         print("Primer sequence is ideal for analysis")
         break
-   
+
+###LISTS, LIST COMPREHENSIONS AND THE STACK DATA STRUCTURE
+#Task 1 
+my_list = [1, 2, 3, 4, 5]
+print(my_list[0])
+print(my_list[-1])
+my_list.append(8)
+print(my_list)
+
+#Task 2
+numbers = [10, 20, 30, 40, 50]
+numbers.pop(2)
+print(numbers)
+numbers.sort(reverse = True)
+print(numbers)
+
+#Task 3
+my_num = [1, 2, 3, 4, 5, 6]
+even = []
+for n in my_num:
+    if n%2 == 0:
+        even.append(n)
+print(even)
+
+#List comprehension
+even = [n for n in my_num if n%2 == 0]
+print(even)
+
+#Task 4
+dna = ['A', 'T', 'G', 'C', 'A', 'A', 'G']
+for base in dna:
+    a_count = dna.count('A')
+print(a_count)
+
+new_dna = ['T' if base == 'A' else base for base in dna]
+print(new_dna)
+
+new_dna = [base for base in dna 'T' ]
+
+#Task 5
+expression = [2.5, 7.8, 1.2, 9.0, 3.3]
+print(max(expression))
+
+new_exp = [num for num in expression if num > 3]
+print(new_exp)
+    
+#Task 6
+dna = 'ATGCCGTAGCTAA'
+codon_list = [dna[i:i+3] for i in range(0, len(dna), 3)]
+print(codon_list)
+
+#Task 7
+sequences = ['ATGCGA', 'CGTAAG', 'GCTATC']
+for seq in sequences:
+    gc_count = 0
+    for base in seq:
+        if base in ["G", "C"]:
+            gc_count += 1
+    gc_content = (gc_count / len(seq)) * 100
+print(f"{seq}: {gc_content:.2f}")
+
+#Task 8
+dna = 'ATGATGCATGCCG'
+positions = []
+start = 0
+while start <= len(dna) -3:
+    pos = dna.find('ATG', start)
+    if pos == -1:
+        break
+    positions.append(pos)
+    start = pos + 1
+
+print(positions)
+
+#Alternatively
+codon_pos = [i for i in range(len(dna)) if dna[i:i+3] == 'ATG']
+codon_pos
+
+#Task 9
+class Stack:
+    """A LIFO stack implemented using a Python list."""
+    
+    def __init__(self):
+        """Initialise an empty stack"""
+        self._data = []
+        
+    def push(self, item):
+        """Push item onto the top of the stack"""
+        self._data.append(item)
+        
+    def pop(self):
+        """Remove and return the top item"""
+        if self.is_empty():
+            raise IndexError("pop from an empty stack")
+        return self._data.pop()
+    
+    def peek(self):
+        """Return the top item without removing it"""
+        if self.is_empty():
+            raise IndexError("peek at an empty stack")
+        return self._data[-1]
+    
+    def is_empty(self):
+        """Return True if the stack contains no items"""
+        return len(self._data) == 0
+    
+    def size(self):
+        """Return the number of items in the stack"""
+        return len(self._data)
+    
+    def __str__(self):
+        """Human-readable representation"""
+        return f"Stack(bottom -> top): {self._data}"
+
+s = Stack()
+s.push('A')
+s.push('T')
+s.push('G')
+s.push('C')
+print(s)
+
+rev_stack = "".join(s.pop() for _ in range(s.size()))
+print(rev_stack)
+
+def reverse_complement(sequence):
+    base_complements = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
+    return "".join(base_complements[base] for base in sequence)[::-1]
+
+dna = 'ATGC'
+print(reverse_complement(dna))
+
+#Task 10
+amino_acids = ['A', 'C', 'D', 'E']
+masses = [71.08, 103.01, 115.09, 129.12]
+amino_dict = dict(zip(amino_acids, masses))
+
+protein = "ACDE"
+total_sum = sum(amino_dict[aa] for aa in protein)
+print(total_sum)
+
+#Task 11
+dna = 'ATGCCGTAGCTAA'
+dna_codons = [dna[i:i+3] for i in range(0, len(dna), 3)]
+print(dna_codons)
+
+def is_palindrome(sequence):
+    return sequence[::-1] == sequence
+
+seq_1 = 'AAGAA'
+print(is_palindrome(seq_1))
+
+seq_2 = 'AGAC'
+print(is_palindrome(seq_2))
+
+for codon in dna_codons:
+    print(codon, is_palindrome(codon))
+
+atg_pos = [i for i in range(0, len(dna), 3) if dna[i:i+3] == "ATG"]
+print(atg_pos)
+
+#stack validation
+dna_stack = Stack()
+dna_stack.push('A')
+dna_stack.push('T')
+dna_stack.push('G')
+dna_stack.push('C')
+dna_stack.push('C')
+dna_stack.push('G')
+dna_stack.push('T')
+dna_stack.push('A')
+dna_stack.push('G')
+dna_stack.push('C')
+dna_stack.push('T')
+dna_stack.push('A')
+dna_stack.push('A')
+print(dna_stack)
+
+rev_dna_stack = "".join(dna_stack.pop() for _ in range(dna_stack.size()))
+print(rev_dna_stack)
+
+rev_dna_codons = []
+for i in range(0, len(rev_dna_stack),3):
+    codon = rev_dna_stack[i:i+3]
+    rev_dna_codons.append(codon)
+print(rev_dna_codons)
+
+for codons in rev_dna_codons:
+    print(codons, is_palindrome(codons))
+
+
+
+
