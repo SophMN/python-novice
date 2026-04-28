@@ -322,7 +322,7 @@ print(a_count)
 new_dna = ['T' if base == 'A' else base for base in dna]
 print(new_dna)
 
-new_dna = [base for base in dna 'T' ]
+new_dna = [base for base in dna 'T']
 
 #Task 5
 expression = [2.5, 7.8, 1.2, 9.0, 3.3]
@@ -364,17 +364,17 @@ codon_pos = [i for i in range(len(dna)) if dna[i:i+3] == 'ATG']
 codon_pos
 
 #Task 9
+
 class Stack:
     """A LIFO stack implemented using a Python list."""
-    
     def __init__(self):
         """Initialise an empty stack"""
         self._data = []
-        
+    
     def push(self, item):
         """Push item onto the top of the stack"""
         self._data.append(item)
-        
+
     def pop(self):
         """Remove and return the top item"""
         if self.is_empty():
@@ -390,7 +390,7 @@ class Stack:
     def is_empty(self):
         """Return True if the stack contains no items"""
         return len(self._data) == 0
-    
+        
     def size(self):
         """Return the number of items in the stack"""
         return len(self._data)
@@ -473,6 +473,38 @@ print(rev_dna_codons)
 
 for codons in rev_dna_codons:
     print(codons, is_palindrome(codons))
+
+##List comprehension practice
+#Problem 1: Convert bases into lower case
+dna_seq = "ATGCGTAC"
+bases = [base.lower() for base in dna_seq]
+print(bases)
+
+#Problem 2: List all the G and C bases
+dna = "ATGCGTACGTTAGC"
+gc_bases = [base for base in dna if base in ["G", "C"]]
+print(gc_bases)
+
+#Problem 3: List the codons from the given DNA string
+dna = "ATGCGTACGTTAGC"
+codons = [dna[i:i+3] for i in range(0, len(dna)-2, 3)]
+print(codons)
+
+#Problem 4: GC content per codon
+dna = "ATGCGTACGTTAGC"
+count = 0
+gc_contents = [dna[i:i+3] for i in range(0, len(dna)-2, 3)]
+
+#Problem 5
+dna = "ATGTTTTAACCC"
+
+codon_table = {
+    "ATG": "M",
+    "TTT": "F",
+    "TAA": "*",
+    "CCC": "P"
+    }
+aminos = [dna[i:i+3] for i in range(0, len(dna), 3)]
 
 
 
